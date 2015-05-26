@@ -1,0 +1,35 @@
+/* Additional styles for my presentations */
+#logo img {
+	max-height: 4%;
+}
+.reveal {
+	tab-size: 4;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	-webkit-tab-size: 4;
+}
+.reveal footer {
+	position: fixed;
+	bottom: 2px;
+	right: 10px;
+}
+.reveal li {
+	margin-bottom: 1em;
+}
+.reveal p {
+	line-height: 1.4em;
+	margin-bottom: 1em;
+}
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+	margin-bottom: 0.5em;
+}
+.reveal .lower h1, .reveal .lower h2, .reveal .lower h3, .reveal .lower h4, .reveal .lower h5, .reveal .lower h6 {
+	text-transform: none;
+}
+.reveal .controls {
+	bottom: 20px;
+}
+.reveal footer p {
+	line-height: 0.3em;
+	font-size: 25%;
+}

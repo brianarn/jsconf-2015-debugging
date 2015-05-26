@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Debugging Deep Dive</title>
+  <meta name="description" content="Presentation Guideline for JSConf 2015 training">
+  <meta name="author" content="Brian Arnold">
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Styles for Reveal -->
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+  <link rel="stylesheet" href="css/brianarn.css">
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/docco.css">
+
+  <!-- I guess we can be nice -->
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <section>
+          <h1>Debugging Deep Dive</h1>
+          <h2>All the things your browser can do</h2>
+          <p style="padding-top: 3em; font-size: 0.7em">Hashtags: #jsconf #debugging</p>
+        </section>
+        <section>
+          <h3>Brian Arnold</h3>
+          <p>
+            <a href="http://twitter.com/brianarn">@brianarn</a> | <a href="http://www.randomthink.net">randomthink.net</a>
+          </p>
+          <ul>
+            <li>Staff Software Engineer @ <a href="http://www.bazaarvoice.com">Bazaarvoice</a></li>
+            <li>Lord of Waterdeep</li>
+            <li>Rock Band guitar expert</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Outline</h2>
+          <ul>
+            <li>Exploration of Developer Tools</li>
+            <li>Console API</li>
+            <li>Command Line API</li>
+            <li>Techniques</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Developer Tools</h1>
+          <h2>Exploration!</h2>
+        </section>
+        <section>
+          <h2>Elements</h2>
+          <h3>Peeking at the DOM</h3>
+        </section>
+        <section>
+          <h2>Network</h2>
+          <ul>
+            <li>Overview</li>
+            <li>Chrome's Timeline</li>
+            <li>Details</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Scripts</h2>
+          <ul>
+            <li>Fuzzy Finder</li>
+            <li>Pretty printing</li>
+            <li>Searching</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Breaking Execution</h2>
+          <ul>
+            <li>Breakpoints</li>
+            <li>Conditionally brekaing</li>
+            <li>Other types of breakpoints</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Other areas</h2>
+          <ul>
+            <li>Timeline</li>
+            <li>Profiles</li>
+            <li>Resources</li>
+          </ul>
+          <p>All great, but more for analysis than straight debugging</p>
+        </section>
+        <section>
+          <h2>Emulation</h2>
+          <ul>
+            <li>Viewport</li>
+            <li>Mobile</li>
+            <li>Throttling</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Console</h2>
+          <p>There's so much here, it gets its own section!</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Console API</h1>
+          <h2>Much more than just <code>console.log</code></h2>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Command Line API</h1>
+          <h2>Getting hands-on with things</h2>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Techniques</h1>
+          <h2>(Here there be hacks, sometimes)</h2>
+        </section>
+        <section>
+          <h2>Use a style guide!</h2>
+          <p>Inconsistently written code SUCKS to debug</p>
+          <p>Look into things like <a href="https://github.com/rwaldron/idiomatic.js/">Idiomatic</a> for a starting point, and <a href="http://editorconfig.org">EditorConfig</a> to help enforce it</p>
+          <blockquote>
+            <p>You don't write code for yourself, you write it for the moron who has to maintain it in a year.</p>
+            <p>More often than not, <strong>you</strong> are that moron.</p>
+          </blockquote>
+        </section>
+        <section>
+          <h2>Learn JavaScript</h2>
+          <h3>No, really, learn the core</h3>
+          <p>Read the spec, read JS: TDG, go beyond the good parts</p>
+          <p>Read up on ES5, ES6, ES7</p>
+          <p>Subscribe to JS Weekly</p>
+          <img src="images/jstgptdg.jpg" alt="lol">
+        </section>
+        <section>
+          <h2>Rubber Duck</h2>
+          <ul>
+            <li>Colleagues</li>
+            <li>Friends at other shops</li>
+            <li>An actual rubber duck</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Private Mode</h2>
+          <p>Not just for hiding things</p>
+        </section>
+        <section>
+          <h2>Extra Users</h2>
+          <p>For when Private Mode isn't enough</p>
+        </section>
+        <section>
+          <h2>Breakpoint Actions</h2>
+          <p>Use and abuse of conditional breakpoints for fun and profit*</p>
+          <p><em>* There may not be profit</em></p>
+        </section>
+        <section>
+          <h2>Crimes Against Production</h2>
+          <a href="images/breakpoint-abuse.png">
+            <img src="images/breakpoint-abuse.png" alt="Breakpoint abuse">
+          </a>
+        </section>
+        <section>
+          <h2>`console.group` EXTREME!!1!</h2>
+          <pre><code>    _(toWrap)
+      .chain()
+      .functions()
+      .each(function (method) {
+        var oldMethod = toWrap[method];
+
+        toWrap[method] = function () {
+          var groupName = identifier + ': ' + method;
+          console.group(groupName);
+          console.log('%s args: %o', method, arguments);
+
+          var value = oldMethod.apply(this, arguments);
+
+          console.log('%s return value: %o', method, value);
+          console.groupEnd(groupName);
+
+          return value;
+        };
+      });</code></pre>
+          <a href="https://gist.github.com/brianarn/8951284">https://gist.github.com/brianarn/8951284</a>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>Resources TODO UPDATE</h2>
+          <ul>
+            <li><a href="https://developer.chrome.com/devtools/docs/console-api">Console API (Chrome)</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">Console API (Firefox)</a></li>
+            <li><a href="https://developer.chrome.com/devtools/docs/commandline-api">Command Line API (Chrome)</a></li>
+            <li><a href="http://getfirebug.com/wiki/index.php/Command_Line_API">Command Line API (Firebug)</a></li>
+            <li><a href="http://discover-devtools.codeschool.com">Discover DevTools</a></li>
+            <li><a href="http://www.randomthink.net/blog/2012/11/breakpoint-actions-in-javascript/">Breakpoint Actions in JavaScript</a></li>
+          </ul>
+        </section>
+      </section>
+    </div>
+    <footer>
+      <p>Debugging Deep Dive: Brian Arnold Sinclair @ JSConf 2015</p>
+    </footer>
+  </div>
+
+  <!-- Scripts yay -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.min.js"></script>
+  <script>
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      theme: 'sky',
+      transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+      transitionSpeed: 'fast', // default/fast/slow
+
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        // { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        // { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+    });
+  </script>
+</body>
+</html>
