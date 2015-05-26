@@ -113,17 +113,79 @@
           <h1>Console API</h1>
           <h2>Much more than just <code>console.log</code></h2>
         </section>
+        <section>
+          <h2>Logging</h2>
+          <ul>
+            <li>Basic types</li>
+            <li>Formatting</li>
+            <li>Tabular output</li>
+            <li>Tracing</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Grouping</h2>
+          <h3>Logging in style</h3>
+        </section>
+        <section>
+          <h2>Recording</h2>
+          <ul>
+            <li>Profiling</li>
+            <li>Timing</li>
+          </ul>
+        </section>
       </section>
       <section>
         <section>
           <h1>Command Line API</h1>
           <h2>Getting hands-on with things</h2>
         </section>
+        <section>
+          <h2>Dollars!</h2>
+          <ul>
+            <li>$_</li>
+            <li>$0 - $4</li>
+            <li>$ / $$</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Inspecting</h2>
+          <ul>
+            <li>inspect</li>
+            <li>dir / dirxml</li>
+            <li>keys / values</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Observing</h2>
+          <ul>
+            <li>debug</li>
+            <li>monitor</li>
+            <li>monitorEvents</li>
+            <li>getEventListeners</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Other Utilities</h2>
+          <ul>
+            <li>Right-click for Global</li>
+            <li>copy</li>
+            <li>clear</li>
+            <li>table</li>
+          </ul>
+        </section>
       </section>
       <section>
         <section>
           <h1>Techniques</h1>
           <h2>(Here there be hacks, sometimes)</h2>
+        </section>
+        <section>
+          <h2>Learn JavaScript</h2>
+          <h3>No, really, learn the core</h3>
+          <p>Read the spec, read JS: TDG, go beyond the good parts</p>
+          <p>Read up on ES5, ES6, ES7</p>
+          <p>Subscribe to JS Weekly</p>
+          <img src="images/jstgptdg.jpg" alt="lol">
         </section>
         <section>
           <h2>Use a style guide!</h2>
@@ -133,14 +195,6 @@
             <p>You don't write code for yourself, you write it for the moron who has to maintain it in a year.</p>
             <p>More often than not, <strong>you</strong> are that moron.</p>
           </blockquote>
-        </section>
-        <section>
-          <h2>Learn JavaScript</h2>
-          <h3>No, really, learn the core</h3>
-          <p>Read the spec, read JS: TDG, go beyond the good parts</p>
-          <p>Read up on ES5, ES6, ES7</p>
-          <p>Subscribe to JS Weekly</p>
-          <img src="images/jstgptdg.jpg" alt="lol">
         </section>
         <section>
           <h2>Rubber Duck</h2>
@@ -159,9 +213,29 @@
           <p>For when Private Mode isn't enough</p>
         </section>
         <section>
-          <h2>Breakpoint Actions</h2>
-          <p>Use and abuse of conditional breakpoints for fun and profit*</p>
+          <h2>Named Function Expressions</h2>
+          <p>
+            Named functions are easier to debug, as the call stack has a nice,
+            clean name right there in it!
+          </p>
+        </section>
+        <section>
+          <h2>Dollar parent Exploration</h2>
+          <p>
+            Combining <code>$_</code> and <code>$0</code> for fun and profit*
+          </p>
           <p><em>* There may not be profit</em></p>
+        </section>
+        <section>
+          <h2>Breakpoint Actions</h2>
+          <p>Use and abuse of conditional breakpoints</p>
+        </section>
+        <section>
+          <h2>Native replacement</h2>
+          <p>
+            Just about everything is mutable, so make changes
+            <pre><code>SomeNative.prototype.someMethod = function () { debugger; }</code></pre>
+          </p>
         </section>
         <section>
           <h2>Crimes Against Production</h2>
@@ -179,15 +253,20 @@
 
         toWrap[method] = function () {
           var groupName = identifier + ': ' + method;
+
           console.group(groupName);
           console.log('%s args: %o', method, arguments);
 
-          var value = oldMethod.apply(this, arguments);
-
-          console.log('%s return value: %o', method, value);
-          console.groupEnd(groupName);
-
-          return value;
+          try {
+            var value = oldMethod.apply(this, arguments);
+            console.log('%s return value: %o', method, value);
+            return value;
+          } catch (e) {
+            console.error('%s error: %o', method, e);
+          } finally {
+            console.log('%s: Exiting', method);
+            console.groupEnd(groupName);
+          }
         };
       });</code></pre>
           <a href="https://gist.github.com/brianarn/8951284">https://gist.github.com/brianarn/8951284</a>

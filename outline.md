@@ -39,13 +39,16 @@
     - $_
     - $0 - $4
     - $ / $$
-  - copy
   - dir / dirxml
   - keys / values
   - inspect
   - debug / monitor
   - monitorEvents
   - getEventListeners
+  - Right-click global
+  - copy
+  - clear
+  - table
 
 ## Techniques
 
