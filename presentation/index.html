@@ -245,30 +245,23 @@
         </section>
         <section>
           <h2>`console.group` EXTREME!!1!</h2>
-          <pre><code>    _(toWrap)
-      .chain()
-      .functions()
-      .each(function (method) {
-        var oldMethod = toWrap[method];
+          <pre><code>    toWrap[method] = function wrapped () {
+                var groupName = identifier + ': ' + method;
 
-        toWrap[method] = function () {
-          var groupName = identifier + ': ' + method;
+                console[grouping](groupName);
+                console.log('%s args: %o', method, arguments);
 
-          console.group(groupName);
-          console.log('%s args: %o', method, arguments);
-
-          try {
-            var value = oldMethod.apply(this, arguments);
-            console.log('%s return value: %o', method, value);
-            return value;
-          } catch (e) {
-            console.error('%s error: %o', method, e);
-          } finally {
-            console.log('%s: Exiting', method);
-            console.groupEnd(groupName);
-          }
-        };
-      });</code></pre>
+                try {
+                  var value = oldMethod.apply(this, arguments);
+                  console.log('%s return value: %o', method, value);
+                  return value;
+                } catch (e) {
+                  console.error('%s error: %o', method, e);
+                } finally {
+                  console.log('%s: Exiting', method);
+                  console.groupEnd(groupName);
+                }
+              };</code></pre>
           <a href="https://gist.github.com/brianarn/8951284">https://gist.github.com/brianarn/8951284</a>
         </section>
       </section>
